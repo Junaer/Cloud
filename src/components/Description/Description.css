@@ -1,0 +1,12 @@
+.description_container_subtitle {
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+    padding-right: 10px;
+}
+
+.description_container {
+    display: flex;
+    justify-content: space-between;
+    border-top: 4px rgb(36, 187, 247) solid;
+}
