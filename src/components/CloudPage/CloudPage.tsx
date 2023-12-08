@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { BaseSyntheticEvent, MouseEventHandler, SyntheticEvent, useState } from 'react'
 import './CloudPage.css'
 import Description from '../Description/Description'
 import { IDescription, IProps } from '../Description/type'
@@ -26,6 +26,15 @@ export default function CloudPage() {
         return (<Description data={el} key={el.id}/>)
     })
 
+    function handleLogout(element: BaseSyntheticEvent) {
+        console.log(element)
+        document.cookie
+    }
+
+    function handleDeleteFile(element: BaseSyntheticEvent) {
+        console.log(element.target)
+    }
+
     return (
         <>
             <div className='work_space'>
@@ -36,7 +45,7 @@ export default function CloudPage() {
             </div>
             <div className='work_menu'>
                 <span>JUNAER</span>
-                <button>Logout</button>
+                <button className='work_menu_logout_button'>Logout</button>
             </div>
         </>
 
