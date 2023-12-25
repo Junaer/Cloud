@@ -60,7 +60,7 @@ export default function CloudPage() {
             </div>
             <div className='work_menu'>
                 <span>JUNAER</span>
-                <button className='work_menu_logout_button'>Logout</button>
+                <button className='work_menu_logout_button' onClick={handleLogout}>Logout</button>
             </div>
         </>
 
