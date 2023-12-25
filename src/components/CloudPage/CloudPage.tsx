@@ -1,10 +1,13 @@
-import React, { BaseSyntheticEvent, MouseEventHandler, SyntheticEvent, useState } from 'react'
+import { BaseSyntheticEvent, useState, useEffect } from 'react'
 import './CloudPage.css'
 import Description from '../Description/Description'
+import { useNavigate } from 'react-router-dom'
 import { IDescription, IProps } from '../Description/type'
 
 
 export default function CloudPage() {
+    const navigate = useNavigate();
+
     const [data, setData] = useState<IDescription[]>([{
         id: 1,
         name: 'game.exe',
@@ -22,13 +25,25 @@ export default function CloudPage() {
         lastLoadDate: '13.12.2023'
     }])
 
+    
+
+    useEffect(() => {
+        let token = "Bearer " + String(localStorage.getItem('token'))
+        fetch('http://127.0.0.1:8000/api/v1/file/', {headers: {"Authorization": token}})
+        .then(response => response.json())
+        .then(test => setData(test))
+    }, [])
+
+    
+    
     const listItems = data.map(el => {
         return (<Description data={el} key={el.id}/>)
     })
 
     function handleLogout(element: BaseSyntheticEvent) {
         console.log(element)
-        document.cookie
+        localStorage.clear()
+        return navigate("/");
     }
 
     function handleDeleteFile(element: BaseSyntheticEvent) {
@@ -49,7 +64,7 @@ export default function CloudPage() {
             </div>
         </>
 
-        
+
         
     )
     }
