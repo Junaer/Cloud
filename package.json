@@ -11,6 +11,9 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.0.1",
+    "buffer": "^6.0.3",
+    "jsonwebtoken": "^9.0.2",
+    "jwt-decode": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^9.0.4",
@@ -19,6 +22,7 @@
     "redux-saga": "^1.2.3"
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.5",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
     "@typescript-eslint/eslint-plugin": "^6.10.0",

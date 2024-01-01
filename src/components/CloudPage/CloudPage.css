@@ -32,3 +32,8 @@
     padding-top: 25px;
     justify-content: center;
 }
+
+.work_menu_user_name {
+    font-size: 130%;
+    color: whitesmoke;
+}

@@ -6,6 +6,7 @@ import { IDescription, IProps } from '../Description/type'
 import { RootState } from "@reduxjs/toolkit/query"
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchGet } from '../_rtk/slices/filesSlice'
+import { jwtDecode } from "jwt-decode";
 
 
 
@@ -13,6 +14,10 @@ export default function CloudPage() {
     const navigate = useNavigate();
     const data = useSelector((state: RootState) => state.files.data)
     const dispatch = useDispatch()
+    // const jwtToken = localStorage.getItem('token')
+    let token = jwtDecode(localStorage.getItem('token'))
+    console.log(token)
+    
     
 
     useEffect(() => {
@@ -41,12 +46,9 @@ export default function CloudPage() {
                 </span>
             </div>
             <div className='work_menu'>
-                <span>JUNAER</span>
+                <span className='work_menu_user_name'>{token.username}</span>
                 <button className='work_menu_logout_button' onClick={handleLogout}>Logout</button>
             </div>
-        </>
-
-
-        
+        </>        
     )
     }
