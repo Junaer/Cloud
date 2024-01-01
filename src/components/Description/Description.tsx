@@ -78,6 +78,14 @@ export default function Description({data}: IProps) {
         [name]: value
     }))}
 
+  async function handleSave(element: BaseSyntheticEvent) {
+    const body = {name: form.name, description: form.description}
+    const response = await (await fetch(`http://127.0.0.1:8000/api/v1/file/${data.id}/`, {method: 'PATCH', body: JSON.stringify(body),
+    headers: {"Authorization": token, 'Content-Type': 'application/json;charset=utf-8'}})).json()
+    dispatch(fetchGet())
+    setEdit(false)
+  }
+
 
   const edit_off = (
     <div className="description_container">
@@ -97,7 +105,7 @@ export default function Description({data}: IProps) {
     <button onClick={handleEdit}>Cancel</button>
     <span className="description_container_subtitle"><b>Name:</b><input onChange={handleInputChange} type="text" name="name" value={form.name}/></span>
     <span className="description_container_subtitle"><b>Comment:</b><input onChange={handleInputChange} type="text" name="description" value={form.description}/></span>
-    <button>Save</button>
+    <button onClick={handleSave}>Save</button>
     <span className="description_container_subtitle"><b>Size:</b>{data.size}</span>
     <span className="description_container_subtitle"><b>Unload date:</b>{`${unloadDate.getDay()}.${unloadDate.getDate()}.${unloadDate.getFullYear()}`}</span>
     <span className="description_container_subtitle"><b>Last load date:</b>{lastLoadDate}</span>
