@@ -5,6 +5,7 @@ import React, { BaseSyntheticEvent, useState } from "react"
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { fetchGet } from '../_rtk/slices/filesSlice'
+import { backendUrl } from "../../url"
 
 
 export default function Description({data}: IProps) {
@@ -47,7 +48,7 @@ export default function Description({data}: IProps) {
   })}
 
   async function handleDeleteFile(element: BaseSyntheticEvent) {
-    let response = await fetch(`http://127.0.0.1:8000/api/v1/file/${data.id}`, {headers: {"Authorization": token}, method: 'DELETE'})
+    let response = await fetch(`${backendUrl}api/v1/file/${data.id}`, {headers: {"Authorization": token}, method: 'DELETE'})
     dispatch(fetchGet())
     if (!response.ok) {
       alert('Произошла ошибка при удалении файла')
@@ -55,14 +56,10 @@ export default function Description({data}: IProps) {
   }
 
   async function handleGetShareLink(element: BaseSyntheticEvent) {
-    let response = await (await fetch(`http://127.0.0.1:8000/anonym_link/${data.id}`, {headers: {"Authorization": token}})).json()
-    if (!response.ok) {
-      alert('Произошла ошибка при удалении файла')
-    }
-    else {
-    await navigator.clipboard.writeText(response.link)
+    let response = await (await fetch(`${backendUrl}anonym_link/${data.id}`, {headers: {"Authorization": token}})).json()
+    console.log(response)
+    navigator.clipboard.writeText(`${backendUrl}media/cloud/${response.link}`)
     alert('Ссылка скопирована')
-    }
   }
 
   async function handleEdit(element: BaseSyntheticEvent) {
@@ -80,7 +77,7 @@ export default function Description({data}: IProps) {
 
   async function handleSave(element: BaseSyntheticEvent) {
     const body = {name: form.name, description: form.description}
-    const response = await (await fetch(`http://127.0.0.1:8000/api/v1/file/${data.id}/`, {method: 'PATCH', body: JSON.stringify(body),
+    const response = await (await fetch(`${backendUrl}api/v1/file/${data.id}/`, {method: 'PATCH', body: JSON.stringify(body),
     headers: {"Authorization": token, 'Content-Type': 'application/json;charset=utf-8'}})).json()
     dispatch(fetchGet())
     setEdit(false)
