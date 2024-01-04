@@ -72,7 +72,8 @@ export default function CloudPage() {
             body: formdata,
             redirect: 'follow'
         })
-        console.log(formdata)
+        setFile('')
+        setDescription('')
         if (response.ok) {
             dispatch(fetchGet())
         }
