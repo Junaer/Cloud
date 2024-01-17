@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk, createEntityAdapter } from '@reduxjs/toolkit'
 import { IDescription, IProps, IPropsList } from '../../Description/type'
+import { backendUrl } from '../../../url'
 
 export interface CounterState {
   data: IProps
@@ -25,10 +26,10 @@ const initialState: IPropsList = {
 }
 
 export const fetchGet = createAsyncThunk(
-    'http://127.0.0.1:8000/api/v1/file/',
+    `${backendUrl}api/v1/file/`,
     async () => {
         let token = "Bearer " + String(localStorage.getItem('token'))
-        const response = await fetch('http://127.0.0.1:8000/api/v1/file/', {headers: {"Authorization": token}})
+        const response = await fetch(`${backendUrl}api/v1/file/`, {headers: {"Authorization": token}})
         return response.json()
     }
   )
