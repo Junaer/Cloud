@@ -10,6 +10,7 @@ const initialState: IPropsList = {
     data: [{
             id: 1,
             name: 'game.exe',
+            created_by: 'sad',
             description: 'react',
             size: 'm',
             unload_date: '02.01.2022',
@@ -18,6 +19,7 @@ const initialState: IPropsList = {
         {
             id: 2,
             name: 'text.txt',
+            created_by: 'sad',
             description: 'nestjs',
             size: 'xl',
             unload_date: '20.11.2023',
