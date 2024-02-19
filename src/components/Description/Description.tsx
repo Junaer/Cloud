@@ -55,12 +55,17 @@ export default function Description({data}: IProps) {
     }
   }
 
-  async function handleGetShareLink(element: BaseSyntheticEvent) {
-    let response = await (await fetch(`${backendUrl}anonym_link/${data.id}`, {headers: {"Authorization": token}})).json()
-    console.log(response)
-    navigator.clipboard.writeText(`${backendUrl}media/cloud/${response.link}`)
-    alert('Ссылка скопирована')
-  }
+  async function handleGetShareLink(element) {
+    let response = await (await fetch(`${backendUrl}anonym_link/${data.id}`, { headers: { "Authorization": token } })).json();
+    console.log(response);
+    try {
+        navigator.clipboard.writeText(`${backendUrl}media/cloud/${response.link}`);
+        alert(`Ссылка скопирована ${backendUrl}media/cloud/${response.link}`);
+    }
+    catch {
+        alert(`Ссылка скопирована ${backendUrl}media/cloud/${response.link}`);
+    }
+}
 
   async function handleEdit(element: BaseSyntheticEvent) {
     setEdit((old_state => !old_state))
